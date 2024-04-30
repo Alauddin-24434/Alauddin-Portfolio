@@ -1,0 +1,41 @@
+/* MainLayout.css */
+
+/* Styles for main layout */
+.main-layout {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Styles for sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #f0f0f0;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+
+/* Styles for content */
+.content {
+    flex: 1;
+    margin-left: 250px; /* Adjust margin to match sidebar width */
+}
+
+/* Media query for large screens (lg) */
+@media (min-width: 992px) {
+    .sidebar {
+        display: block;
+    }
+
+    .content {
+        margin-left: 250px; /* Adjust margin to match sidebar width */
+    }
+}
+
+/* Media query for extra-large screens (xl) */
+@media (min-width: 1200px) {
+    .sidebar {
+        width: 300px; /* Adjust sidebar width for larger screens if needed */
+    }
+}
