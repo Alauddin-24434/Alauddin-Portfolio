@@ -1,5 +1,6 @@
 import React from 'react';
 import './Projects.css'; // Import CSS file for styling
+import DynamicTitle from '../../components/Sidebar/DynamiTitle/DynamicTitle';
 
 const ProjectCard = ({ image, title, description, gitLink, LiveLink }) => {
     return (
@@ -57,8 +58,9 @@ const Projects = () => {
     ];
 
     return (
-        <div className="projects-section h-screen overflow-y-auto p-4 w-full mx-auto "  style={{ backgroundColor: 'rgb(255, 255, 255)' }}>
-            <h2 className='text-center text-2xl font-bold my-6'>Projects</h2>
+        <div className="projects-section h-screen overflow-y-auto p-8 w-full mx-auto "  style={{ backgroundColor: 'rgb(255, 255, 255)' }}>
+            
+            <DynamicTitle title="Projects"/>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
                 {projects.map((project) => (
                     <ProjectCard 

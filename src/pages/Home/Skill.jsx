@@ -7,11 +7,13 @@ import { TbBrandNextjs } from "react-icons/tb";
 import { SiMongoose } from "react-icons/si";
 
 import { TbBrandVscode } from "react-icons/tb";
+import DynamicTitle from '../../components/Sidebar/DynamiTitle/DynamicTitle';
 const SkillSection = () => {
     return (
-        <div id="skills" className="p-4 h-screen overflow-scroll">
+        <div id="skills" className="p-8 h-screen overflow-scroll">
             <div className="container mx-auto ">
-                <h2 className="text-3xl text-center font-bold mb-5">Skills</h2>
+                
+                <DynamicTitle title="Skills"  />
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 ">
                     {/* Individual skill items */}
                     <SkillItem title="HTML5" Icon={FaHtml5} />
