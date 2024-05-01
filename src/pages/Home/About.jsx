@@ -6,7 +6,7 @@ const About = () => {
     const imageUrl = "https://i.ibb.co/N160tYK/416228632-894428778946652-2543987042980586755-n.jpg"; // URL of the image
 
     return (
-        <div className="p-8" style={{ backgroundColor: 'rgb(255, 255, 255)' }}>
+        <div className="p-8 h-screen" style={{ backgroundColor: 'rgb(255, 255, 255)' }}>
            
             <DynamicTitle title="About Me" />
             <div className="flex flex-col lg:flex-row lg:gap-4">

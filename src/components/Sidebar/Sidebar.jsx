@@ -39,7 +39,7 @@ const Sidebar = () => {
                 <div className="avatar flex justify-center w-[185px] h-[185px] bg-slate-700 rounded-full items-center">
                     <img className="w-[170px] cursor-zoom-in h-[170px] rounded-full" src="https://i.ibb.co/HFTgSpr/Alauddin-removebg-preview-1.png" alt="Avatar" />
                 </div>
-                <ul className="flex flex-col text-white text-xl items-center my-4 gap-y-4">
+                <ul className="flex flex-col text-white text-lg items-center my-4 gap-y-4">
 
                     <li>
                         <button onClick={() => scrollToSection("home")} style={{ color: activeSection === "home" ? "#FFD700" : "inherit" }}>
@@ -65,6 +65,11 @@ const Sidebar = () => {
                         </button>
                     </li>
                     <li>
+                        <button onClick={() => scrollToSection("education")} style={{ color: activeSection === "education" ? "#FFD700" : "inherit" }}>
+                         Education
+                        </button>
+                    </li>
+                    <li>
                         <button onClick={() => scrollToSection("contact")} style={{ color: activeSection === "contact" ? "#FFD700" : "inherit" }}>
                             Contact Us
                         </button>
@@ -73,22 +78,22 @@ const Sidebar = () => {
                 <ul className="flex w-full flex-row items-center gap-4 justify-center absolute bottom-0 text-white">
             <li>
                 <a href="https://www.facebook.com/profile.php?id=100075429342974" target="_blank" rel="noopener noreferrer">
-                    <FaFacebookF />
+                    <FaFacebookF className="hover:text-blue-500"/>
                 </a>
             </li>
             <li>
                 <a href="https://medium.com/@muhammadalauddin24434" target="_blank" rel="noopener noreferrer">
-                    <FaMedium />
+                    <FaMedium className="hover:text-blue-500"/>
                 </a>
             </li>
             <li>
                 <a href="https://www.linkedin.com/in/md-alauddin-muhammud-alauddin" target="_blank" rel="noopener noreferrer">
-                    <FaLinkedin />
+                    <FaLinkedin className="hover:text-blue-500"/>
                 </a>
             </li>
             <li>
-                <a href="https://github.com/Alauddin-24434?tab=repositories" target="_blank" rel="noopener noreferrer">
-                    <FaGithub />
+                <a  href="https://github.com/Alauddin-24434?tab=repositories" target="_blank" rel="noopener noreferrer">
+                    <FaGithub  className="hover:text-blue-500"/>
                 </a>
             </li>
         </ul>
