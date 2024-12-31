@@ -34,7 +34,7 @@ const Sidebar = () => {
     };
 
     return (
-        <section className="flex bg-[#111418] justify-center w-[250px] h-screen">
+        <section className="flex bg-[#10002b] justify-center w-[250px] h-screen">
             <div className="my-10 relative">
                 <div className="avatar flex justify-center w-[185px] h-[185px] bg-slate-700 rounded-full items-center">
                     <img className="w-[170px] cursor-zoom-in h-[170px] rounded-full" src="https://i.ibb.co/HFTgSpr/Alauddin-removebg-preview-1.png" alt="Avatar" />

@@ -63,7 +63,7 @@ const Projects = () => {
     ];
 
     return (
-        <div className="projects-section p-8 h-screen">
+        <div className="projects-section p-8 h-screen bg-gray-50 ">
             <DynamicTitle title="Projects"/>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
                 {projects.map((project) => (

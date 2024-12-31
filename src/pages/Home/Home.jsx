@@ -1,60 +1,63 @@
-import React, { useEffect, useState } from "react";
-import { TypeAnimation } from "react-type-animation";
-import { FaLaptopCode, FaDownload } from 'react-icons/fa'; // Import download icon from react-icons
+import About from "../../components/Shared/About/About";
 
 const Home = () => {
-    const resumeUrl = 'https://drive.usercontent.google.com/u/0/uc?id=1bX166Vh3gu0bOiOjUeJWVet9pQI3MGZA&export=download';
+  const resumeUrl =
+    "https://drive.usercontent.google.com/u/0/uc?id=1bX166Vh3gu0bOiOjUeJWVet9pQI3MGZA&export=download";
+  const imageUrl =
+    "https://i.ibb.co.com/yqtpHHD/image-1-removebg-preview-1-1-removebg-preview.png";
+  return (
+   <div>
+     <section className="pt-10 h-screen overflow-hidden  md:pt-0 sm:pt-16 2xl:pt-16">
+      <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+        <div className="grid items-center grid-cols-1 md:grid-cols-2">
+          <div>
+            <h2 className="text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl lg:text-5xl">
+              Hey 👋 I am&nbsp;
+              <br className="block sm:hidden" />
+              Md Alauddin
+            </h2>
 
-    return (
-        <div className="relative w-full h-screen">
-            <div className="absolute inset-0">
-                {/* Background image */}
-                <img
-                    src="https://i.ibb.co/fksDjFb/386745.jpg"
-                    alt="Background"
-                    className="w-full h-full object-cover"
-                    style={{ filter: "brightness(40%)" }} // Darken the image
-                />
-                {/* Dark overlay */}
-                <div className="absolute inset-0 bg-[#404244] opacity-55"></div>
-            </div>
-            {/* Content */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center">
-                <div className="">
-                    <h1 className="text-3xl md:text-4xl font-bold mb-4 text-gold-500 text-[#FFD700] text-opacity-70 sm:text-3xl lg:text-6xl">
-                        Hi, I'm Alauddin
-                    </h1>
-                    <span className="text-2xl">
-                        <TypeAnimation
-                            sequence={[
-                                "I'm a Frontend Developer",      //  Continuing previous Text
-                                500,
-                                "I'm a MERN stack Developer",
-                                500,
-                                'Web Development is my passion',
-                                500,
-                                'Always learning and growing',
-                                500,
-                                'Creating awesome web experiences',
-                                500,
-                                '', // Empty string to pause before looping
-                                500, // Delay before starting over
-                            ]}
+            <p className="max-w-lg mt-3 text-xl leading-relaxed text-white dark:text-gray-300 md:mt-8">
+              Amet minim mollit non deserunt ullamco est sit aliqua dolor do
+              amet sint. Velit officia consequat duis enim velit mollit.
+              Exercitation veniam consequat sunt nostrud amet.
+            </p>
 
-                            repeat={Infinity}
-                        />
-                    </span>
+            <p className="mt-4 text-xl text-gray-600 dark:text-gray-300 md:mt-8">
+              <span className="relative inline-block">
+                <span className="absolute inline-block w-full bottom-0.5 h-2 bg-yellow-300 dark:bg-gray-900"></span>
+                <span className="relative"> Have a question? </span>
+              </span>
+              <br className="block sm:hidden" />
+              Ask me on{" "}
+              <a
+                href="#"
+                title=""
+                className="transition-all duration-200 text-sky-500 dark:text-sky-400 hover:text-sky-600 dark:hover:text-sky-500 hover:underline"
+              >
+                Twitter
+              </a>
+            </p>
+          </div>
 
-                </div>
-
-                {/* Download button with download icon */}
-                <a href={resumeUrl} download="Alauddin_Resume.pdf" className="mt-4 flex items-center bg-transparent border border-white text-white py-2 px-4 rounded-lg hover:bg-white hover:text-black transition duration-300">
-                    <FaDownload className="mr-2" /> {/* Download icon */}
-                    Download Resume
-                </a>
-            </div>
+          <div className="relative">
+            <img
+              className="absolute inset-x-0 bottom-0 -mb-48 -translate-x-1/2 left-1/2"
+              src="https://cdn.rareblocks.xyz/collection/celebration/images/team/1/blob-shape.svg"
+              alt=""
+            />
+            <img
+              className="relative rounded-xl w-2/3 h-auto mx-auto 2xl:origin-bottom 2xl:scale-100 border-opacity-35"
+              src={imageUrl}
+              alt="Your Image"
+            />
+          </div>
         </div>
-    );
+      </div>
+    </section>
+    
+   </div>
+  );
 };
 
 export default Home;

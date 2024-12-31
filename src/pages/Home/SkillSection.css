@@ -1,8 +1,5 @@
 /* Skill item styles */
-.skill-item {
-    animation: moveUp 1s ease infinite alternate; /* Animation properties */
-    transition: border-color 0.3s ease; /* Added transition for border color */
-}
+
 
 @keyframes moveUp {
     0% {
@@ -15,13 +12,7 @@
 
 /* Color styles */
 /* Example color scheme */
-#skills {
-    background-color: #f3f4f6;
-}
 
-.skill-item {
-    border: 2px solid #e5e7eb;
-}
 
 .skill-item:hover {
     border-color: #60a5fa; /* Example color change on hover */

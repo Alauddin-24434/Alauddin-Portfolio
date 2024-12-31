@@ -55,7 +55,7 @@ const Contact = () => {
     };
 
     return (
-        <div className="p-8 h-screen bg-gray-100">
+        <div className="p-8 h-screen bg-gray-50">
             <div id="contact" className="container mx-auto ">
                 <DynamicTitle title="Contact Us" />
           

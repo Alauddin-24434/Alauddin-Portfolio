@@ -1,5 +1,7 @@
 
-import About from './About';
+import ParticleBackground from '../../components/ParticleBackground/ParticleBackground';
+import AboutMe from '../../components/Shared/About/About';
+import About from '../../components/Shared/About/About';
 import Contact from './Contuct';
 import Education from './Education';
 import Home from './Home';
@@ -9,13 +11,15 @@ import SkillSection from './Skill';
 
 const LandingPage = () => {
     return (
-        <div className=' '>
+        <div className='relative bg-[#841CF6]'>
+              <ParticleBackground />
             <section id="home" >
 
                 <Home />
             </section>
+    
             <section id="about" >
-                <About />
+                <AboutMe />
             </section>
 
             <section id="skill" >
