@@ -53,7 +53,7 @@ const Sidebar = () => {
               target="_blank"
               rel="noopener noreferrer" 
             >
-              <FaLinkedin className="hover:text-[#1CD15D] text-[#E0E0E0] text-2xl" />
+              <FaLinkedin className="hover:text-[#1CD15D] text-[#E0E0E0] bg-blue-700 rounded-lg text-2xl" />
             </a>
           </li>
           <li>
@@ -62,7 +62,7 @@ const Sidebar = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaMedium className="hover:text-[#1CD15D] text-[#E0E0E0] text-2xl" />
+              <FaMedium className="hover:text-[#1CD15D] text-[#E0E0E0] bg-blue-700 rounded-lg text-2xl" />
             </a>
           </li>
           <li>
@@ -71,7 +71,7 @@ const Sidebar = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaGithub className="hover:text-[#1CD15D] text-[#E0E0E0] text-2xl" />
+              <FaGithub className="hover:text-[#1CD15D] text-[#E0E0E0]  bg-blue-700 rounded-full text-2xl" />
             </a>
           </li>
         </ul>

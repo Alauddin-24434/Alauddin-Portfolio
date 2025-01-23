@@ -52,8 +52,8 @@ const Education = () => {
     <div className="my-16 min-h-[70vh] ">
         <div className="max-w-7xl mx-auto flex flex-col gap-y-6 p-4 md:p-0">
         {/* Dynamic Title */}
-        <div className=" w-full py-4 rounded-lg pl-2 bg-[#1A1A1A] text-[#E0E0E0]">
-        <h2 className="text-3xl font-normal leading-tight text-center  uppercase">
+        <div className=" w-full py-4 rounded-lg pl-2 text-[#E0E0E0]">
+        <h2 className="text-4xl font-extrabold underline leading-tight text-center  uppercase">
         Education & Courses
         </h2>
       </div>

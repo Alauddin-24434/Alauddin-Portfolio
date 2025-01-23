@@ -1,140 +1,130 @@
-import { useState, useRef } from "react";
-import emailjs from "emailjs-com";
+import {  useRef } from "react";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import DynamicTitle from "../../components/Sidebar/DynamiTitle/DynamicTitle";
-import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
+import { FaEnvelope, FaMapMarkerAlt, FaPhoneSquare } from "react-icons/fa";
+import { emailPublic, emailService, emailTempalte } from "../../config/apiConfig";
+import emailjs from '@emailjs/browser';
+const Contact = () => {
+  
 
-const Contact = ({ title }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const contactDetails = [
+    {
+      icon: <FaMapMarkerAlt />,
+      title: "Our Address",
+      details: ["1230 Maecenas Street", "New York, USA"],
+    },
+    {
+      icon: <FaPhoneSquare />,
+      title: "Contact",
+      details: ["+1 (123) 456-7890", "tailnext@gmail.com"],
+    },
+    {
+      icon: <FaEnvelope />,
+      title: "Working Hours",
+      details: ["Mon - Fri: 08:00 - 17:00", "Sat - Sun: 08:00 - 12:00"],
+    },
+  ];
 
-  const formRef = useRef(null);
+  const form = useRef();
 
-  // Function to handle form submission
+
+  console.log(form.current)
+console.log(emailService)
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Check if any of the fields are empty
-    if (!formData.name || !formData.email || !formData.message) {
-      toast.error("Please fill out all fields.");
-      return;
-    }
+  
+    // Prepare the data to be sent to the email template
+    
 
-    // Send email using email.js
+    // Send email using EmailJS
     emailjs
-      .sendForm("service_qfrm1li", "template_b7t4les", formRef.current, "2mr-riIr06MMNN0Lo")
-      .then((result) => {
-        toast.success("Your message has been sent successfully!");
-        formRef.current.reset();
-        setFormData({
-          name: "",
-          email: "",
-          message: "",
-        });
+      .sendForm(emailService, emailTempalte, form.current, {
+        publicKey: emailPublic,
       })
-      .catch((error) => {
-        toast.error("Oops! Something went wrong. Please try again later.");
-      });
+      .then(
+        () => {
+          console.log("SUCCESS!");
+          toast.success("Message sent successfully!");
+         
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+          toast.error("Failed to send the message.");
+        }
+      );
   };
 
-  // Function to handle input change
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+ 
 
   return (
-    <section>
-      <div className="max-w-7xl mx-auto h-screen flex flex-col gap-y-6 p-4 md:p-0  mt-10">
-      <div className=" w-full py-4 rounded-lg pl-2 bg-[#1A1A1A] text-[#E0E0E0]">
-        <h2 className="text-3xl font-normal leading-tight text-center  uppercase">
-      Get In touch
-        </h2>
-      </div>
-        <div className="flex items-stretch justify-center">
-          <div className="grid md:grid-cols-2">
-            <div className="h-full pr-6">
-              <p className="mt-3 mb-12 text-lg text-white dark:text-slate-400">
-                We’d love to hear from you! Fill out the form or contact us directly via the information below.
-              </p>
-              <ul className="mb-6">
-                <li className="flex">
-                  <div className="flex h-10 w-10 items-center justify-center rounded bg-blue-900 text-gray-50">
-                    <FaMapMarkerAlt />
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-bold text-white">Our Address</h3>
-                    <p className="text-white">1230 Maecenas Street, New York, EEUU</p>
-                  </div>
-                </li>
-                <li className="flex">
-                  <div className="flex h-10 w-10 items-center justify-center rounded bg-blue-900 text-gray-50">
-                    <FaPhone />
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-bold text-white">Contact</h3>
-                    <p className="text-white">Mobile: +1 (123) 456-7890</p>
-                    <p className="text-white">Mail: tailnext@gmail.com</p>
-                  </div>
-                </li>
-                <li className="flex">
-                  <div className="flex h-10 w-10 items-center justify-center rounded bg-blue-900 text-gray-50">
-                    <FaEnvelope />
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-bold text-white">Working Hours</h3>
-                    <p className="text-white">Monday - Friday: 08:00 - 17:00</p>
-                    <p className="text-white">Saturday & Sunday: 08:00 - 12:00</p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div className="card h-fit max-w-6xl p-5 md:p-12">
-              <h2 className="mb-4 text-2xl font-bold text-white">Ready to Get Started?</h2>
-              <form ref={formRef} onSubmit={handleSubmit}>
-                <div className="mb-6">
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Your name"
-                    className="mb-2 w-full rounded-md border border-gray-400 py-2 px-4 shadow-md dark:text-gray-300"
-                    value={formData.name}
-                    onChange={handleChange}
-                  />
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Your email address"
-                    className="mb-2 w-full rounded-md border border-gray-400 py-2 px-4 shadow-md dark:text-gray-300"
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
-                  <textarea
-                    name="message"
-                    rows="5"
-                    placeholder="Write your message..."
-                    className="mb-2 w-full rounded-md border border-gray-400 py-2 px-4 shadow-md dark:text-gray-300"
-                    value={formData.message}
-                    onChange={handleChange}
-                  ></textarea>
+    <section className=" py-20">
+      <div className="max-w-7xl mx-auto p-6 md:p-12">
+        <div className="text-center mb-10">
+          <h2 className="text-4xl font-extrabold underline text-white uppercase">
+            Get in Touch
+          </h2>
+          
+        </div>
+        <div className="grid md:grid-cols-2 gap-12">
+          {/* Contact Information */}
+          <div className="space-y-6 text-gray-100">
+            {contactDetails?.map((item, index) => (
+              <div key={index} className="flex items-center">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-700">
+                  {item.icon}
                 </div>
-                <div className="text-center">
-                  <button
-                    type="submit"
-                    className="w-full rounded-md bg-blue-800 px-6 py-3 text-white"
-                  >
-                    Send Message
-                  </button>
+                <div className="ml-4">
+                  <h3 className="text-xl font-semibold">{item.title}</h3>
+                  {item.details.map((detail, idx) => (
+                    <p key={idx}>{detail}</p>
+                  ))}
                 </div>
-              </form>
-            </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Contact Form */}
+          <div className="bg-[#1A1A1A] text-[#E0E0E0] p-8 shadow-lg rounded-lg">
+            <h3 className="text-2xl font-bold mb-6">Send Us a Message</h3>
+            <form ref={form} onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <input
+                  type="text"
+                  name="user_name"
+                  placeholder="Your Name"
+                  className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                 
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  type="email"
+                  name="user_email"
+                  placeholder="Your Email"
+                  className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                  
+                />
+              </div>
+              <div className="mb-4">
+                <textarea
+                  name="message"
+                  rows="4"
+                  placeholder="Your Message"
+                  className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                 
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                value="send"
+                className="w-full py-3 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition"
+              >
+                Send Message
+              </button>
+            </form>
           </div>
         </div>
       </div>

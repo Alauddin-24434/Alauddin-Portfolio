@@ -67,7 +67,7 @@ const Home = () => {
   }, [displayedText, isDeleting, currentWordIndex, blinkCount, words]);
 
   return (
-    <div className="relative flex items-center justify-center min-h-[70vh]  shadow-xl">
+    <div className="relative flex items-center justify-center min-h-[70vh]  shadow-lg">
       <div className="flex flex-col-reverse md:flex-row items-center max-w-7xl mx-auto px-4 gap-8 w-full">
         {/* Text Section */}
         <div className="flex-1 text-center md:text-left">
@@ -92,7 +92,7 @@ const Home = () => {
     <a
       href={resumeUrl}
       download
-      className="inline-flex items-center justify-center px-6 py-3 text-[#121212] bg-[#1CD15D] hover:bg-[#2DF470] rounded-lg text-lg md:text-xl transition duration-200"
+      className="inline-flex items-center justify-center px-6 py-3 text-[#E0E0E0] bg-blue-700 hover:bg-blue-600 rounded-lg text-lg md:text-xl transition duration-200"
     >
       <span className="flex gap-2 items-center">
         <FaFileDownload />
@@ -103,7 +103,7 @@ const Home = () => {
     <p className="text-gray-700 dark:text-gray-400">Loading resume link...</p>
   )}
 
-  <button className="inline-flex items-center justify-center px-6 py-3 text-[#E0E0E0] bg-[#444444] hover:bg-[#1CD15D] rounded-lg text-lg md:text-xl transition duration-200">
+  <button className="inline-flex items-center justify-center px-6 py-3 text-[#E0E0E0] bg-[#444444] hover:bg-blue-600 rounded-lg text-lg md:text-xl transition duration-200">
     Read Blog
   </button>
 </div>
