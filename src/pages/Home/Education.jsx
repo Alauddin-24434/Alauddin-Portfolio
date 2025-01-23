@@ -1,4 +1,4 @@
-import { FaGraduationCap } from "react-icons/fa"; // Graduation cap icon
+import { FaDownload, FaGraduationCap } from "react-icons/fa"; // Graduation cap icon
 import { FaChalkboardTeacher } from "react-icons/fa"; // Teacher icon for courses
 import DynamicTitle from "../../components/Sidebar/DynamiTitle/DynamicTitle";
 
@@ -25,22 +25,29 @@ const Education = () => {
     },
   ];
 
-  // Courses data
-  const courses = [
+  const certificates = [
     {
       id: 1,
-      title: "Web Development (Online)",
-      platform: "Programming Hero",
+      title: "Web Development Course",
+      organization: "Programming Hero",
       duration: "6 Months",
+      downloadLink: "/certificates/web-development-course.pdf", // Replace with actual link
     },
     {
       id: 2,
-      title: "Full Stack Track: Next-Level Web Development",
-      platform: "Programming Hero",
+      title: "Full-Stack Web Development",
+      organization: "Next Level Web Development - Programming Hero",
       duration: "6 Months",
+      downloadLink: "/certificates/full-stack-course.pdf", // Replace with actual link
+    },
+    {
+      id: 3,
+      title: "JavaScript for Beginners",
+      organization: "Learn & Master JavaScript - Simplilearn",
+      duration: "2 Weeks",
+      downloadLink: "/certificates/javascript-course.pdf", // Replace with actual link
     },
   ];
-
   return (
     <div className="my-16 min-h-[70vh] ">
         <div className="max-w-7xl mx-auto flex flex-col gap-y-6 p-4 md:p-0">
@@ -60,7 +67,7 @@ const Education = () => {
                 className="text-[#E0E0E0] bg-[#1A1A1A] rounded-lg  p-6 transition transform hover:scale-105 hover:shadow-xl"
               >
                 <div className="flex items-center mb-4 space-x-4">
-                  <FaGraduationCap className="text-4xl text-[#1CD15D]" />
+                  <FaGraduationCap className="text-4xl text-[#E0E0E0]" />
                   <h4 className="text-lg font-bold">{item.institution}</h4>
                 </div>
                 <p className="text-md text-gray-400">{item.degree}</p>
@@ -72,22 +79,33 @@ const Education = () => {
 
         {/* Courses Section */}
         <div>
-          <h3 className="text-2xl font-semibold text-[#E0E0E0] mb-6 uppercase">Courses</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {courses.map((course) => (
-              <div
-                key={course.id}
-                className="text-[#E0E0E0] bg-[#1A1A1A] rounded-lg shadow-lg p-6 transition transform hover:scale-105 hover:shadow-xl"
-              >
-                <div className="flex items-center mb-4 space-x-4">
-                  <FaChalkboardTeacher className="text-4xl text-purple-500" />
-                  <h4 className="text-lg font-bold">{course.title}</h4>
-                </div>
-                <p className="text-md text-gray-400">{course.platform}</p>
-                <p className="text-sm text-gray-500">Duration: {course.duration}</p>
-              </div>
-            ))}
-          </div>
+          <h3 className="text-2xl font-semibold text-[#E0E0E0] mb-6 uppercase">Courses With Certificate</h3>
+             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+                    {certificates.map((certificate) => (
+                      <div
+                        key={certificate.id}
+                        className="relative bg-[#1A1A1A] shadow-md hover:shadow-lg transition-shadow duration-300 rounded-lg p-6"
+                      >
+                        {/* Download Icon */}
+                        <a
+                          href={certificate.downloadLink}
+                          download
+                          className="absolute top-6 right-6 text-blue-600 hover:text-blue-800 transition-colors duration-300"
+                          title="Download Certificate"
+                        >
+                          <FaDownload size={20} />
+                        </a>
+          
+                        <h4 className="text-xl font-bold text-[#E0E0E0] mb-2">
+                          {certificate.title}
+                        </h4>
+                        <p className="text-gray-400">{certificate.organization}</p>
+                        <p className="text-sm text-gray-500">
+                          Duration: {certificate.duration}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
         </div>
       </div>
     </div>

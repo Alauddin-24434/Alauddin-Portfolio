@@ -10,7 +10,7 @@ import SkillSection from "./Skill";
 
 const LandingPage = () => {
   return (
-    <div className="  ">
+    <div className="mt-3 md:mt-0 lg:mt-0">
       <section id="home">
         <Home />
       </section>
@@ -30,6 +30,7 @@ const LandingPage = () => {
       <section id="education">
         <Education />
       </section>
+      
 
       <section id="blog">
         <BlogList />
