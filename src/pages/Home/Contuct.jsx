@@ -51,10 +51,10 @@ const Contact = ({ title }) => {
   };
 
   return (
-    <section id="contact">
-      <div className="max-w-7xl mx-auto  flex flex-col gap-y-6 p-4 md:p-0  mt-10">
+    <section>
+      <div className="max-w-7xl mx-auto h-screen flex flex-col gap-y-6 p-4 md:p-0  mt-10">
       <div className=" w-full py-4 rounded-lg pl-2 bg-[#1A1A1A] text-[#E0E0E0]">
-        <h2 className="text-3xl font-normal leading-tight  uppercase">
+        <h2 className="text-3xl font-normal leading-tight text-center  uppercase">
       Get In touch
         </h2>
       </div>

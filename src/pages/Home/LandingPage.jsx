@@ -1,4 +1,3 @@
-
 import BlogList from "../../components/BlogRelated/BlogList/BlogList";
 import AboutMe from "../../components/Shared/About/AboutMe";
 
@@ -11,8 +10,7 @@ import SkillSection from "./Skill";
 
 const LandingPage = () => {
   return (
-    <div className=" ">
-      
+    <div className="  ">
       <section id="home">
         <Home />
       </section>
@@ -21,27 +19,25 @@ const LandingPage = () => {
         <AboutMe />
       </section>
 
-      <section id="project">
-        <Portfolio />
-      </section>
-
       <section id="skill">
         <SkillSection />
+      </section>
+
+      <section id="project">
+        <Portfolio />
       </section>
 
       <section id="education">
         <Education />
       </section>
+
       <section id="blog">
         <BlogList />
       </section>
 
-
-
       <section id="contact">
         <Contact />
       </section>
-     
     </div>
   );
 };

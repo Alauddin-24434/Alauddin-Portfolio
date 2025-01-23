@@ -51,9 +51,9 @@ const Sidebar = () => {
             <a
               href="https://www.linkedin.com/in/alauddin-dev"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer" 
             >
-              <FaLinkedin className="hover:text-blue-500" />
+              <FaLinkedin className="hover:text-[#1CD15D] text-[#E0E0E0] text-2xl" />
             </a>
           </li>
           <li>
@@ -62,25 +62,25 @@ const Sidebar = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaMedium className="hover:text-blue-500" />
+              <FaMedium className="hover:text-[#1CD15D] text-[#E0E0E0] text-2xl" />
             </a>
           </li>
           <li>
             <a
-              href="https://github.com/Alauddin-24434?tab=repositories"
+              href="https://github.com/Alauddin-24434"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaGithub className="hover:text-blue-500" />
+              <FaGithub className="hover:text-[#1CD15D] text-[#E0E0E0] text-2xl" />
             </a>
           </li>
         </ul>
 
-        <ul className="flex flex-col text-black text-lg  my-16 gap-y-4">
+        <ul className="flex flex-col text-black text-lg  my-20 gap-y-4">
           <li>
             <button
               onClick={() => scrollToSection("home")}
-              className={`w-full py-2 text-center rounded-lg text-[#E0E0E0]  ${activeSection === "home" ? "bg-[#444444] text-[#E0E0E0]" : "hover:bg-[#007BFF] hover:text-white"}`}
+              className={`w-full py-2 text-center rounded-lg text-[#E0E0E0]  ${activeSection === "home" ? "bg-[#444444] text-[#E0E0E0]" : "hover:bg-[#232323] hover:text-white"}`}
             >
               Home
             </button>
@@ -88,7 +88,7 @@ const Sidebar = () => {
           <li>
             <button
               onClick={() => scrollToSection("about")}
-              className={`w-full py-2 text-center rounded-lg  text-[#E0E0E0] ${activeSection === "about" ? "bg-[#444444] text-[#E0E0E0]" : "hover:bg-[#007BFF] hover:text-white"}`}
+              className={`w-full py-2 text-center rounded-lg  text-[#E0E0E0] ${activeSection === "about" ? " bg-[#444444] text-[#E0E0E0]" : "hover:bg-[#232323] hover:text-white"}`}
             >
               About Me
             </button>
@@ -96,7 +96,7 @@ const Sidebar = () => {
           <li>
             <button
               onClick={() => scrollToSection("skill")}
-              className={`w-full py-2 text-center rounded-lg text-[#E0E0E0]  ${activeSection === "skill" ? "bg-[#444444] text-[#E0E0E0]" : "hover:bg-[#007BFF] hover:text-white"}`}
+              className={`w-full py-2 text-center rounded-lg text-[#E0E0E0]  ${activeSection === "skill" ? "bg-[#444444] text-[#E0E0E0]" : "hover:bg-[#232323] hover:text-white"}`}
             >
               Skills
             </button>
@@ -104,7 +104,7 @@ const Sidebar = () => {
           <li>
             <button
               onClick={() => scrollToSection("project")}
-              className={`w-full py-2 text-center rounded-lg text-[#E0E0E0]  ${activeSection === "project" ? "bg-[#007BFF] text-white" : "hover:bg-[#007BFF] hover:text-white"}`}
+              className={`w-full py-2 text-center rounded-lg text-[#E0E0E0]  ${activeSection === "project" ? "bg-[#444444] text-[#E0E0E0]" : "hover:bg-[#232323] hover:text-white"}`}
             >
               Projects
             </button>
@@ -112,7 +112,7 @@ const Sidebar = () => {
           <li>
             <button
               onClick={() => scrollToSection("education")}
-              className={`w-full py-2 text-center rounded-lg text-[#E0E0E0]  ${activeSection === "education" ? "bg-[#444444] text-[#E0E0E0]" : "hover:bg-[#007BFF] hover:text-white"}`}
+              className={`w-full py-2 text-center rounded-lg text-[#E0E0E0]  ${activeSection === "education" ? "bg-[#444444] text-[#E0E0E0]" : "hover:bg-[#232323] hover:text-white"}`}
             >
               Education
             </button>
@@ -120,7 +120,7 @@ const Sidebar = () => {
           <li>
             <button
               onClick={() => scrollToSection("blog")}
-              className={`w-full py-2 text-center rounded-lg  text-[#E0E0E0] ${activeSection === "blog" ? "bg-[#444444] text-[#E0E0E0]" : "hover:bg-[#007BFF] hover:text-white"}`}
+              className={`w-full py-2 text-center rounded-lg  text-[#E0E0E0] ${activeSection === "blog" ? "bg-[#444444] text-[#E0E0E0]" : "hover:bg-[#232323] hover:text-white"}`}
             >
               Blog
             </button>
@@ -128,7 +128,7 @@ const Sidebar = () => {
           <li>
             <button
               onClick={() => scrollToSection("contact")}
-              className={`w-full py-2 text-center rounded-lg text-[#E0E0E0]  ${activeSection === "contact" ? "bg-[#444444] text-[#E0E0E0]" : "hover:bg-[#007BFF] hover:text-white"}`}
+              className={`w-full py-2 text-center rounded-lg text-[#E0E0E0]  ${activeSection === "contact" ? "bg-[#444444] text-[#E0E0E0]" : "hover:bg-[#232323] hover:text-white"}`}
             >
               Contact Us
             </button>
