@@ -1,62 +1,77 @@
-import React from 'react';
-import './SkillSection.css'; // Import CSS for animations and styles
-import { FaHtml5, FaCss3Alt, FaJsSquare, FaReact, FaNodeJs, FaServer, FaGithub } from 'react-icons/fa';
-import { SiTailwindcss, SiFirebase, SiMongodb, SiPostgresql } from "react-icons/si";
-import { IoLogoFigma } from "react-icons/io5";
-import { TbBrandNextjs, TbBrandPrisma } from "react-icons/tb";
-import { SiMongoose } from "react-icons/si";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import DynamicTitle from "../../components/Sidebar/DynamiTitle/DynamicTitle";
+import BASE_URL from "../../config/apiConfig";
 
-import { TbBrandVscode } from "react-icons/tb";
-import DynamicTitle from '../../components/Sidebar/DynamiTitle/DynamicTitle';
-import { RxVercelLogo } from 'react-icons/rx';
-import { PiFileSqlThin } from 'react-icons/pi';
 const SkillSection = () => {
-    return (
-        <div id="skills" className ="p-8">
-            <div className=" mx-auto ">
-                
-                <DynamicTitle title="Skills"  />
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 ">
-                    {/* Individual skill items */}
-                    <SkillItem title="HTML5" Icon={FaHtml5} />
-                    <SkillItem title="CSS3" Icon={FaCss3Alt} />
-                    <SkillItem title="JavaScript" Icon={FaJsSquare} />
-                    <SkillItem title="Tailwind CSS" Icon={SiTailwindcss} />
-                    <SkillItem title="React.js" Icon={FaReact} />
-                    <SkillItem title="Next.js" Icon={TbBrandNextjs} />
-                    <SkillItem title="Node.js" Icon={FaNodeJs} />
-                    <SkillItem title="Express.js" Icon={FaServer} />
+  const [skills, setSkills] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
+  useEffect(() => {
+    const fetchSkills = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/skills`); // Replace with your actual API endpoint
+        setSkills(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError("Failed to fetch skills");
+        setLoading(false);
+      }
+    };
 
-                    <SkillItem title="MongoDB" Icon={SiMongodb} />
-                    <SkillItem title="Mongoose" Icon={SiMongoose} />
-                  
-                    <SkillItem title="Sql" Icon={PiFileSqlThin} />
-                    <SkillItem title="Postgresql" Icon={SiPostgresql} />
-                    <SkillItem title="Prisma" Icon={TbBrandPrisma} />
-                    <SkillItem title="Git" Icon={FaGithub} />
-                    <SkillItem title="Figma" Icon={IoLogoFigma} />
-                    <SkillItem title="Vs Code" Icon={TbBrandVscode} />
-                    <SkillItem title="Firebase" Icon={SiFirebase} />
-                    <SkillItem title="Vercel" Icon={RxVercelLogo} />
+    fetchSkills();
+  }, []);
 
+  return (
+    <div id="skills" className="mt-16">
+      
 
-
-                    {/* Add more skills as needed */}
-                </div>
-            </div>
-        </div>
-    );
+      
+      <div className="max-w-7xl mx-auto flex flex-col  gap-y-6 p-4 md:p-0  ">
+      <div className=" w-full py-4 rounded-lg pl-2 bg-[#1A1A1A] text-[#E0E0E0]">
+        <h2 className="text-3xl font-normal leading-tight  uppercase">
+        Skills
+        </h2>
+      </div>
+        
+        {/* Loading state */}
+        {loading ? (
+          <div className="text-lg text-gray-500">Loading skills...</div>
+        ) : error ? (
+          <div className="text-lg text-red-500">{error}</div>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            {/* Dynamically render skills */}
+            {skills?.skills?.map((skill) => (
+              <SkillItem
+                key={skill?.title}
+                title={skill?.title}
+                logo={skill?.logo}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
-const SkillItem = ({ title, Icon }) => {
-    return (
-        <div className="skill-item p-6 h-44 w-60 rounded-lg shadow-lg flex flex-col items-center justify-center bg-white" >
-            <Icon className="text-5xl mb-2 text-black" />
-            <h3 className="text-xl font-semibold text-black">{title}</h3>
-        </div>
-
-    );
+const SkillItem = ({ title, logo }) => {
+  return (
+    <div
+      className="skill-item p-6 h-40 w-full md:w-48 rounded-lg shadow-lg flex flex-col items-center justify-center bg-[#E0E0E0] transform transition-all duration-500 ease-out hover:scale-105 hover:rotate-2 hover:shadow-xl"
+    >
+      <img
+        src={logo}
+        alt={title}
+        className="w-12 h-12 md:w-16 md:h-16 mb-3 object-contain"
+      />
+      <h3 className="text-base md:text-lg font-semibold text-[#1A1A1A]">
+        {title}
+      </h3>
+    </div>
+  );
 };
 
 export default SkillSection;

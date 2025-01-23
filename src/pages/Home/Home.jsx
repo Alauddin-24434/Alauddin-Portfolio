@@ -1,62 +1,130 @@
-import About from "../../components/Shared/About/About";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import BASE_URL from "../../config/apiConfig";
+import image from "../../../public/alauddin1.png";
+import { FaFileDownload } from "react-icons/fa";
 
 const Home = () => {
-  const resumeUrl =
-    "https://drive.usercontent.google.com/u/0/uc?id=1bX166Vh3gu0bOiOjUeJWVet9pQI3MGZA&export=download";
-  const imageUrl =
-    "https://i.ibb.co.com/yqtpHHD/image-1-removebg-preview-1-1-removebg-preview.png";
+  const [resumeUrl, setResumeUrl] = useState("");
+  const words = [
+    "Full-Stack Developer",
+    "Backend Developer",
+    "Frontend Developer",
+  ];
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [blinkCount, setBlinkCount] = useState(0);
+  const [showCursor, setShowCursor] = useState(true);
+
+  useEffect(() => {
+    const fetchResumeUrl = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/resumes-last`);
+        const uniqueId = response?.data?.response;
+        const url = `https://drive.google.com/uc?id=${uniqueId}&export=download`;
+        setResumeUrl(url);
+      } catch (error) {
+        console.error("Error fetching resume URL:", error);
+      }
+    };
+
+    fetchResumeUrl();
+  }, []);
+
+  useEffect(() => {
+    let timeout;
+
+    const currentWord = words[currentWordIndex];
+
+    if (isDeleting) {
+      timeout = setTimeout(() => {
+        setDisplayedText((prev) => prev.slice(0, prev.length - 1));
+        if (displayedText === "") {
+          setIsDeleting(false);
+          setCurrentWordIndex((prev) => (prev + 1) % words.length);
+        }
+      }, 100);
+    } else if (displayedText === currentWord) {
+      if (blinkCount < 3) {
+        timeout = setTimeout(() => {
+          setShowCursor((prev) => !prev);
+          setBlinkCount((prev) => prev + 1);
+        }, 300);
+      } else {
+        timeout = setTimeout(() => {
+          setIsDeleting(true);
+          setBlinkCount(0);
+        }, 1000);
+      }
+    } else {
+      timeout = setTimeout(() => {
+        setDisplayedText(currentWord.slice(0, displayedText.length + 1));
+      }, 150);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [displayedText, isDeleting, currentWordIndex, blinkCount, words]);
+
   return (
-   <div>
-     <section className="pt-10 h-screen overflow-hidden  md:pt-0 sm:pt-16 2xl:pt-16">
-      <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-        <div className="grid items-center grid-cols-1 md:grid-cols-2">
-          <div>
-            <h2 className="text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl lg:text-5xl">
-              Hey 👋 I am&nbsp;
-              <br className="block sm:hidden" />
-              Md Alauddin
-            </h2>
+    <div className="relative flex items-center justify-center min-h-[70vh]  shadow-xl">
+      <div className="flex flex-col-reverse md:flex-row items-center max-w-7xl mx-auto px-4 gap-8 w-full">
+        {/* Text Section */}
+        <div className="flex-1 text-center md:text-left">
+          <h2 className="text-3xl font-normal leading-tight text-[#E0E0E0] dark:text-white">
+            Hey, I am Md Alauddin
+          </h2>
+          <p className="max-w-lg mt-3 text-5xl font-bold leading-relaxed text-[#E0E0E0] dark:text-gray-300">
+            {displayedText}
+            <span
+              className={`transition-opacity duration-300 ${
+                showCursor ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              |
+            </span>
+          </p>
 
-            <p className="max-w-lg mt-3 text-xl leading-relaxed text-white dark:text-gray-300 md:mt-8">
-              Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-              amet sint. Velit officia consequat duis enim velit mollit.
-              Exercitation veniam consequat sunt nostrud amet.
-            </p>
+         
+          {/* Resume Download and Read Blog Buttons */}
+<div className="flex gap-4 mt-6">
+  {resumeUrl ? (
+    <a
+      href={resumeUrl}
+      download
+      className="inline-flex items-center justify-center px-6 py-3 text-[#121212] bg-[#1CD15D] hover:bg-[#2DF470] rounded-lg text-lg md:text-xl transition duration-200"
+    >
+      <span className="flex gap-2 items-center">
+        <FaFileDownload />
+        Resume
+      </span>
+    </a>
+  ) : (
+    <p className="text-gray-700 dark:text-gray-400">Loading resume link...</p>
+  )}
 
-            <p className="mt-4 text-xl text-gray-600 dark:text-gray-300 md:mt-8">
-              <span className="relative inline-block">
-                <span className="absolute inline-block w-full bottom-0.5 h-2 bg-yellow-300 dark:bg-gray-900"></span>
-                <span className="relative"> Have a question? </span>
-              </span>
-              <br className="block sm:hidden" />
-              Ask me on{" "}
-              <a
-                href="#"
-                title=""
-                className="transition-all duration-200 text-sky-500 dark:text-sky-400 hover:text-sky-600 dark:hover:text-sky-500 hover:underline"
-              >
-                Twitter
-              </a>
-            </p>
-          </div>
+  <button className="inline-flex items-center justify-center px-6 py-3 text-[#E0E0E0] bg-[#444444] hover:bg-[#1CD15D] rounded-lg text-lg md:text-xl transition duration-200">
+    Read Blog
+  </button>
+</div>
 
-          <div className="relative">
+        </div>
+
+        {/* Image Section */}
+        <div className="flex-1 flex justify-center md:justify-end relative">
+          <div className="relative max-w-md w-full">
+           
+
+            {/* Image */}
             <img
-              className="absolute inset-x-0 bottom-0 -mb-48 -translate-x-1/2 left-1/2"
-              src="https://cdn.rareblocks.xyz/collection/celebration/images/team/1/blob-shape.svg"
-              alt=""
-            />
-            <img
-              className="relative rounded-xl w-2/3 h-auto mx-auto 2xl:origin-bottom 2xl:scale-100 border-opacity-35"
-              src={imageUrl}
-              alt="Your Image"
+              className="relative w-full h-full rounded-md object-cover"
+              src={image}
+              alt="Md Alauddin"
             />
           </div>
         </div>
       </div>
-    </section>
-    
-   </div>
+    </div>
   );
 };
 

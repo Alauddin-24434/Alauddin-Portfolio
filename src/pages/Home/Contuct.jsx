@@ -1,113 +1,146 @@
-import React, { useState, useRef } from 'react';
-import emailjs from 'emailjs-com';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa';
-import DynamicTitle from '../../components/Sidebar/DynamiTitle/DynamicTitle';
+import { useState, useRef } from "react";
+import emailjs from "emailjs-com";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import DynamicTitle from "../../components/Sidebar/DynamiTitle/DynamicTitle";
+import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 
-const Contact = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        message: ''
-    });
+const Contact = ({ title }) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
-    const formRef = useRef(null); // Create a ref for the form element
+  const formRef = useRef(null);
 
-    // Function to handle form submission
-    const handleSubmit = (e) => {
-        e.preventDefault(); // Prevent default form submission behavior
-        
-        // Check if any of the fields are empty
-        if (formData.name === '' || formData.email === '' || formData.message === '') {
-            toast.error('Please fill out all fields.');
-            return;
-        }
+  // Function to handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-        // Send email using email.js
-        emailjs.sendForm('service_qfrm1li', 'template_b7t4les', e.target, '2mr-riIr06MMNN0Lo')
-            .then((result) => {
-                console.log(result);
-                console.log(result.text);
+    // Check if any of the fields are empty
+    if (!formData.name || !formData.email || !formData.message) {
+      toast.error("Please fill out all fields.");
+      return;
+    }
 
-                toast.success('Your message has been sent successfully!');
-                // Reset the form after successful submission
-                formRef.current.reset();
-                setFormData({ // Also reset the form data in state
-                    name: '',
-                    email: '',
-                    message: ''
-                });
-            })
-            .catch((error) => {
-                console.error(error.text);
-                toast.error('Oops! Something went wrong. Please try again later.');
-            });
-    };
-
-    // Function to handle input change
-    const handleChange = (e) => {
-        const { name, value } = e.target;
+    // Send email using email.js
+    emailjs
+      .sendForm("service_qfrm1li", "template_b7t4les", formRef.current, "2mr-riIr06MMNN0Lo")
+      .then((result) => {
+        toast.success("Your message has been sent successfully!");
+        formRef.current.reset();
         setFormData({
-            ...formData,
-            [name]: value
+          name: "",
+          email: "",
+          message: "",
         });
-    };
+      })
+      .catch((error) => {
+        toast.error("Oops! Something went wrong. Please try again later.");
+      });
+  };
 
-    return (
-        <div className="p-8 h-screen bg-gray-50">
-            <div id="contact" className="container mx-auto ">
-                <DynamicTitle title="Contact Us" />
-          
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <h3 className="text-xl font-semibold mb-3">Get in Touch</h3>
-                        <p className="text-gray-800 mb-3">Feel free to reach out to us with any questions or feedback you may have.</p>
-                        <form ref={formRef} onSubmit={handleSubmit}>
-                            <div className="mb-4">
-                                <label htmlFor="name" className="block text-gray-800 font-semibold mb-1">Name</label>
-                                <input type="text" id="name" name="name" className="w-full border border-gray-400 rounded py-2 px-3 focus:outline-none focus:border-blue-500" placeholder="Your Name" value={formData.name} onChange={handleChange} />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="email" className="block text-gray-800 font-semibold mb-1">Email</label>
-                                <input type="email" id="email" name="email" className="w-full border border-gray-400 rounded py-2 px-3 focus:outline-none focus:border-blue-500" placeholder="Your Email" value={formData.email} onChange={handleChange} />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="message" className="block text-gray-800 font-semibold mb-1">Message</label>
-                                <textarea id="message" name="message" rows="5" className="w-full border border-gray-400 rounded py-2 px-3 focus:outline-none focus:border-blue-500" placeholder="Your Message" value={formData.message} onChange={handleChange}></textarea>
-                            </div>
-                            <button type="submit" disabled={formData.name === '' || formData.email === '' || formData.message === ''} className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300">Send Message</button>
-                        </form>
-                    </div>
-                    <div>
-                        <h3 className="text-xl font-semibold mb-3">Contact Information</h3>
-                     
-                        <div className="flex items-center mb-3">
-                            <FaMapMarkerAlt className="text-gray-800 mr-2" />
-                            <p className="text-gray-800">City: Barisal</p>
-                        </div>
-                        <div className="flex items-center mb-3">
-                            <FaMapMarkerAlt className="text-gray-800 mr-2" />
-                            <p className="text-gray-800">Country: Bangladesh</p>
-                        </div>
-                        <div className="flex items-center mb-3">
-                            <FaMapMarkerAlt className="text-gray-800 mr-2" />
-                            <p className="text-gray-800">Zip: 8200</p>
-                        </div>
-                        <div className="flex items-center mb-3">
-                            <FaPhone className="text-gray-800 mr-2" />
-                            <p className="text-gray-800">Phone: +880 1871155040</p>
-                        </div>
-                        <div className="flex items-center mb-3">
-                            <FaEnvelope className="text-gray-800 mr-2" />
-                            <p className="text-gray-800">Email: mdalauddin159200@gmail.com</p>
-                        </div>
-                    </div>
-                </div>
+  // Function to handle input change
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  return (
+    <section id="contact">
+      <div className="max-w-7xl mx-auto  flex flex-col gap-y-6 p-4 md:p-0  mt-10">
+      <div className=" w-full py-4 rounded-lg pl-2 bg-[#1A1A1A] text-[#E0E0E0]">
+        <h2 className="text-3xl font-normal leading-tight  uppercase">
+      Get In touch
+        </h2>
+      </div>
+        <div className="flex items-stretch justify-center">
+          <div className="grid md:grid-cols-2">
+            <div className="h-full pr-6">
+              <p className="mt-3 mb-12 text-lg text-white dark:text-slate-400">
+                We’d love to hear from you! Fill out the form or contact us directly via the information below.
+              </p>
+              <ul className="mb-6">
+                <li className="flex">
+                  <div className="flex h-10 w-10 items-center justify-center rounded bg-blue-900 text-gray-50">
+                    <FaMapMarkerAlt />
+                  </div>
+                  <div className="ml-4">
+                    <h3 className="text-lg font-bold text-white">Our Address</h3>
+                    <p className="text-white">1230 Maecenas Street, New York, EEUU</p>
+                  </div>
+                </li>
+                <li className="flex">
+                  <div className="flex h-10 w-10 items-center justify-center rounded bg-blue-900 text-gray-50">
+                    <FaPhone />
+                  </div>
+                  <div className="ml-4">
+                    <h3 className="text-lg font-bold text-white">Contact</h3>
+                    <p className="text-white">Mobile: +1 (123) 456-7890</p>
+                    <p className="text-white">Mail: tailnext@gmail.com</p>
+                  </div>
+                </li>
+                <li className="flex">
+                  <div className="flex h-10 w-10 items-center justify-center rounded bg-blue-900 text-gray-50">
+                    <FaEnvelope />
+                  </div>
+                  <div className="ml-4">
+                    <h3 className="text-lg font-bold text-white">Working Hours</h3>
+                    <p className="text-white">Monday - Friday: 08:00 - 17:00</p>
+                    <p className="text-white">Saturday & Sunday: 08:00 - 12:00</p>
+                  </div>
+                </li>
+              </ul>
             </div>
-            <ToastContainer />
+            <div className="card h-fit max-w-6xl p-5 md:p-12">
+              <h2 className="mb-4 text-2xl font-bold text-white">Ready to Get Started?</h2>
+              <form ref={formRef} onSubmit={handleSubmit}>
+                <div className="mb-6">
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Your name"
+                    className="mb-2 w-full rounded-md border border-gray-400 py-2 px-4 shadow-md dark:text-gray-300"
+                    value={formData.name}
+                    onChange={handleChange}
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Your email address"
+                    className="mb-2 w-full rounded-md border border-gray-400 py-2 px-4 shadow-md dark:text-gray-300"
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
+                  <textarea
+                    name="message"
+                    rows="5"
+                    placeholder="Write your message..."
+                    className="mb-2 w-full rounded-md border border-gray-400 py-2 px-4 shadow-md dark:text-gray-300"
+                    value={formData.message}
+                    onChange={handleChange}
+                  ></textarea>
+                </div>
+                <div className="text-center">
+                  <button
+                    type="submit"
+                    className="w-full rounded-md bg-blue-800 px-6 py-3 text-white"
+                  >
+                    Send Message
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-    );
+      </div>
+      <ToastContainer />
+    </section>
+  );
 };
 
 export default Contact;

@@ -1,10 +1,9 @@
-
-
-const DynamicTitle = ({ title }) => {
+const DynamicTitle = ({ title, textColor = 'text-white' }) => {
     return (
         <div>
-         
-            <h3 className="text-4xl  font-bold mb-6 text-center text-white ">{title}</h3>
+            <h3 className={`text-4xl font-bold mb-6 text-center ${textColor}`}>
+                {title}
+            </h3>
         </div>
     );
 };

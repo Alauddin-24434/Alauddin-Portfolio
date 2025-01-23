@@ -1,77 +1,113 @@
-import React from 'react';
-import { AiFillGithub, AiFillPlayCircle } from 'react-icons/ai';
-import DynamicTitle from '../../components/Sidebar/DynamiTitle/DynamicTitle';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import BASE_URL from "../../config/apiConfig";
 
-const ProjectCard = ({ project }) => {
-    const { image, title, description, gitLink, LiveLink } = project;
+const Portfolio = () => {
+  const [projectsData, setProjectsData] = useState([]);
+  console.log(projectsData);
 
-    return (
-        <div className="overflow-hidden bg-white rounded-lg shadow-lg transform transition duration-300 hover:-translate-y-1 hover:shadow-xl">
-            <img src={image} alt={title} className="w-full h-48 object-cover" />
-            <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2">{title}</h3>
-                <p className="text-gray-700 text-xs mb-4">{description}</p>
-                <div className="flex justify-between items-center">
-                    <a href={gitLink} className="text-blue-500 font-semibold hover:text-blue-700" target="_blank" rel="noopener noreferrer">
-                        <AiFillGithub className="inline-block mr-1" /> GitHub
-                    </a>
-                    {LiveLink && (
-                        <a href={LiveLink} className="text-blue-500 font-semibold hover:text-blue-700" target="_blank" rel="noopener noreferrer">
-                            <AiFillPlayCircle className="inline-block mr-1" /> Demo
-                        </a>
-                    )}
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/projects`);
+        const data = await response.json();
+        setProjectsData(data);
+      } catch (error) {
+        console.error("Error fetching projects data:", error);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
+  return (
+    <div className="relative max-w-7xl mx-auto flex flex-col gap-y-6 p-4 md:p-0  top-10 ">
+      <div className=" w-full py-4 rounded-lg pl-2 bg-[#1A1A1A] text-[#E0E0E0]">
+        <h2 className="text-3xl font-normal leading-tight  uppercase">
+          My Projects
+        </h2>
+      </div>
+
+      {projectsData?.map((data, index) => {
+        let firstChild, secondChild, imageStyle;
+
+        if (index === 0) {
+          // First Card Design
+          firstChild =
+            "lg:mx-auto lg:grid  lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 ";
+          secondChild =
+            "mx-auto max-w-xl px-6 lg:mx-0 lg:max-w-none lg:py-16 lg:px-0";
+          imageStyle = "lg:right-0";
+        } else if (index === 1) {
+          // Second Card Design
+
+          firstChild =
+            "lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24";
+          secondChild =
+            "mx-auto max-w-xl px-6 lg:mx-0 lg:max-w-none lg:py-16 lg:px-0 lg:col-start-2";
+          imageStyle = "lg:left-0";
+        } else {
+          // Default Design for other cards
+          firstChild =
+            "lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 ";
+          secondChild =
+            "mx-auto max-w-xl px-6 lg:mx-0 lg:max-w-none lg:py-16 lg:px-0";
+          imageStyle = "lg:right-0";
+        }
+
+        return (
+          <div className="relative " key={index}>
+            <div className={firstChild}>
+              <div className={secondChild}>
+                <div>
+                  <div className="mt-6">
+                    <h2 className="text-3xl font-bold tracking-tight text-white">
+                      {data?.title}
+                    </h2>
+                    <p className="mt-4 text-lg text-gray-300">
+                      The AI product utilizes advanced NLP algorithms to
+                      understand and interpret human language, enabling it to
+                      accurately process and analyze text-based inputs.
+                    </p>
+                    <p className="mt-4 text-lg text-gray-300">Technologies:</p>
+                    <div className="mt-6 flex gap-x-3">
+                      <a
+                        className="inline-flex rounded-lg bg-pink-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-pink-600 hover:bg-pink-700 hover:ring-pink-700"
+                        href={data?.link || data?.liveLink}
+                      >
+                        Visit
+                      </a>
+                      <a
+                        className="inline-flex rounded-lg bg-pink-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-pink-600 hover:bg-pink-700 hover:ring-pink-700"
+                        href={data?.frontEndLink}
+                      >
+                        Github Front-End
+                      </a>
+                      <a
+                        className="inline-flex rounded-lg bg-pink-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-pink-600 hover:bg-pink-700 hover:ring-pink-700"
+                        href={data?.backEndLink}
+                      >
+                        Github Backend
+                      </a>
+                    </div>
+                  </div>
                 </div>
+              </div>
+              <div className="mt-12 sm:mt-16 lg:mt-0">
+                <div className=" lg:relative lg:m-0 lg:h-full lg:px-0">
+                  <img
+                    className={` rounded-xl shadow-2xl ring-1 ring-black ring-opacity-5 lg:absolute lg:h-full lg:w-auto lg:max-w-none ${imageStyle}`}
+                    src={data?.imageHref}
+                    alt={data?.title}
+                  />
+                </div>
+              </div>
             </div>
-        </div>
-    );
+          </div>
+        );
+      })}
+    </div>
+  );
 };
 
-const Projects = () => {
-    const projects = [
-        {
-            id: 1,
-            image: 'https://i.ibb.co/4N1VzZz/screencapture-e-commerce-bazar-web-app-2024-05-02-02-41-43.png',
-            title: 'Ecommerce Bazar',
-            description: 'An e-commerce platform for buying and selling various products.',
-            gitLink: 'https://github.com/Alauddin-24434/ecomerce-website',
-            LiveLink: 'https://e-commerce-bazar.web.app'
-        },
-        {
-            id: 2,
-            image: 'https://i.ibb.co/Ld1rWb1/screencapture-streme-eight-vercel-app-2024-05-02-02-46-07.png',
-            title: 'Video Streme',
-            description: 'A video streaming application for watching and sharing videos online.',
-            gitLink: 'https://github.com/sajalbiswas1/video-stream-client-side',
-            LiveLink: 'https://streme-eight.vercel.app/'
-        },
-        {
-            id: 3,
-            image: 'https://i.ibb.co/zVbz3d8/g.png',
-            title: 'Restaurant',
-            description: 'An online platform for browsing and ordering food from restaurants.',
-            gitLink: 'https://github.com/Alauddin-24434/NOOR-Resturent',
-            LiveLink: 'https://resturent-5e702.web.app/'
-        },
-        {
-            id: 4,
-            image: 'https://i.ibb.co/vB85KS6/screencapture-alauddin-24434-github-io-flower-shop-assignment-2024-05-02-03-09-45.png',
-            title: 'Flower Shop',
-            description: 'An online flower shop for purchasing a variety of flowers.',
-            gitLink: 'https://github.com/Alauddin-24434/flower-shop-assignment',
-            LiveLink: 'https://alauddin-24434.github.io/flower-shop-assignment/'
-        },
-    ];
-
-    return (
-        <div className="projects-section p-8 h-screen bg-gray-50 ">
-            <DynamicTitle title="Projects"/>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
-                {projects.map((project) => (
-                    <ProjectCard key={project.id} project={project} />
-                ))}
-            </div>
-        </div>
-    );
-};
-
-export default Projects;
+export default Portfolio;
